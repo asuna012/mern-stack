@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./PlaceItem.css";
 import Card from "../../shared/UIElements/Card";
-import Button from "../../shared/UIElements/Button";
+import Button from "../../shared/components/FormElements/Button";
 import Modal from "../../shared/UIElements/Modal";
 const PlaceItem = (props) => {
   const [showMap, setShowMap] = useState(false);
