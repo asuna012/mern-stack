@@ -16,7 +16,7 @@ const DUMMY_PLACES = [
   },
   {
     id: "p2",
-    title: "Empire State Building",
+    title: "Emp.State Building",
     description: "Sample Description",
     imageUrl: "https://media.timeout.com/images/101705309/750/422/image.jpg",
     address: "20 W 34th St., New York, NY 10001, United States",
@@ -30,6 +30,7 @@ const DUMMY_PLACES = [
 const UserPlaces = () => {
   const userId = useParams().userId;
   const loadedPlaces = DUMMY_PLACES.filter((place) => place.creator === userId);
+  console.log(userId);
   return <PlaceList items={loadedPlaces} />;
 };
 
