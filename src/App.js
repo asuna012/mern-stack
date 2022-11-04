@@ -14,11 +14,14 @@ import Auth from "./users/pages/Auth.js";
 import { AuthContext } from "./shared/context/auth-context";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const login = useCallback(() => {
+  const [userId, setUserID] = useState();
+  const login = useCallback((uid) => {
     setIsLoggedIn(true);
+    setUserID(uid);
   }, []);
   const logout = useCallback(() => {
     setIsLoggedIn(false);
+    setUserID(null);
   }, []);
   let routes;
   if (isLoggedIn) {
@@ -30,14 +33,11 @@ function App() {
         <Route path="/:userId/places" exact>
           <UserPlaces />
         </Route>
-        <Route path="/places/:placeId" exact>
-          <UpdatePlace />
-        </Route>
         <Route path="/places/new" exact>
           <NewPlace />
         </Route>
-        <Route path="/:userId/places" exact>
-          <UserPlaces />
+        <Route path="/places/:placeId" exact>
+          <UpdatePlace />
         </Route>
 
         <Redirect to="/" />
@@ -61,7 +61,12 @@ function App() {
   }
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn: isLoggedIn, login: login, logout: logout }}
+      value={{
+        isLoggedIn: isLoggedIn,
+        userId: userId,
+        login: login,
+        logout: logout,
+      }}
     >
       <Router>
         <MainNavigation />
