@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -12,22 +12,10 @@ import UserPlaces from "./places/pages/UserPlaces";
 import UpdatePlace from "./places/pages/UpdatePlace";
 import Auth from "./users/pages/Auth.js";
 import { AuthContext } from "./shared/context/auth-context";
-function App() {
-  const [token, setToken] = useState(false);
-  const [userId, setUserID] = useState();
-  const login = useCallback((uid, token) => {
-    setToken(token);
-    localStorage.setItem(
-      "userData",
-      JSON.stringify({ userId: uid, token: token })
-    );
-    setUserID(uid);
-  }, []);
-  const logout = useCallback(() => {
-    setToken(null);
+import { useAuth } from "./shared/hooks/auth-hook";
 
-    setUserID(null);
-  }, []);
+function App() {
+  const { token, login, logout, userId } = useAuth();
   let routes;
   if (token) {
     routes = (
