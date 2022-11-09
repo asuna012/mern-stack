@@ -70,7 +70,7 @@ const Auth = () => {
     if (isLoggedInMode) {
       try {
         const responseData = await sendRequest(
-          "http://localhost:5000/api/users/login",
+          process.env.REACT_APP_BACKEND_URL + "/users/login",
           "POST",
           JSON.stringify({
             email: formState.inputs.email.value,
@@ -85,12 +85,12 @@ const Auth = () => {
     } else {
       try {
         const formData = new FormData();
-        formData.append('email', formState.inputs.email.value)
-        formData.append('name', formState.inputs.name.value)
-        formData.append('password', formState.inputs.password.value)
-        formData.append('image', formState.inputs.image.value)
+        formData.append("email", formState.inputs.email.value);
+        formData.append("name", formState.inputs.name.value);
+        formData.append("password", formState.inputs.password.value);
+        formData.append("image", formState.inputs.image.value);
         const responseData = await sendRequest(
-          "http://localhost:5000/api/users/signup",
+          process.env.REACT_APP_BACKEND_URL + "/users/signup",
           "POST",
           formData
         );
@@ -119,7 +119,12 @@ const Auth = () => {
             />
           )}
           {!isLoggedInMode && (
-            <ImageUpload id="image" center onInput={inputHandler} errorText="Please provide an image."/>
+            <ImageUpload
+              id="image"
+              center
+              onInput={inputHandler}
+              errorText="Please provide an image."
+            />
           )}
           <Input
             element="input"
